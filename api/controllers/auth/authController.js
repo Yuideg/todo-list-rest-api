@@ -47,8 +47,6 @@ exports.Login = (req, res) => {
                     message: "Login successfull",
                     accessToken: token,
                 });
-
-
             } else {
                 res.status(404).send({
                     Error: "Incorrect username or password!"
