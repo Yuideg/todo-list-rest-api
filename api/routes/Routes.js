@@ -1,46 +1,54 @@
 module.exports = (app) => {
-  const todoController = require("../controllers/todoController");
-  const userController = require("../controllers/userController");
-  const roleController = require("../controllers/roleController");
-  const authController = require("../controllers/auth/authController");
+    const todoController = require("../controllers/todoController");
+    const userController = require("../controllers/userController");
+    const roleController = require("../controllers/roleController");
+    const authController = require("../controllers/auth/authController");
 
-  app
-    .route("/login", )
-    .post(authController.Login);
+    app
+        .route("/login", )
+        .post(authController.Login);
+    app
+        .route('/api/v1/tasks/per-user')
+        .get(todoController.GetAllTaskPerUSer);
+    // TODO-01 TASK API ROUTES
+    app
+        .route("/tasks")
+        .get(todoController.GetAllTask)
+        .get(todoController.GetAllUserTasks)
+        .post(todoController.CreateTask);
 
-  // TODO-01 TASK API ROUTES
-  app
-    .route("/tasks")
-    .get(todoController.GetAllTask)
-    .post(todoController.CreateTask);
+    app
+        .route("/me/tasks")
+        .get(todoController.GetAllUserTasks)
 
-  app
-    .route("/tasks/:id")
-    .get(todoController.GetTaskByID)
-    .put(todoController.UpdateTask)
-    .delete(todoController.DeleteTask);
 
-  //TODO-02 USER API ROUTES
-  app
-    .route("/users")
-    .get(userController.GetAllUser)
-    .post(userController.CreateUser);
+    app
+        .route("/tasks/:id")
+        .get(todoController.GetTaskByID)
+        .put(todoController.UpdateTask)
+        .delete(todoController.DeleteTask);
 
-  app
-    .route("/users/:id")
-    .get(userController.GetUserByID)
-    .put(userController.UpdateUser)
-    .delete(userController.DeleteUser);
+    //TODO-02 USER API ROUTES
+    app
+        .route("/users")
+        // .get(userController.GetAllUser)
+        .post(userController.CreateUser);
 
-   //TODO-03 ROLE API ROUTES
-   app
-   .route("/roles")
-   .get(roleController.GetAllRole)
-   .post(roleController.CreateRole);
+    app
+        .route("/users/:id")
+        .get(userController.GetUserByID)
+        .put(userController.UpdateUser)
+        .delete(userController.DeleteUser);
 
- app
-   .route("/roles/:id")
-   .get(roleController.GetRoleByID)
-   .put(roleController.UpdateRole)
-   .delete(roleController.DeleteRole);
+    //TODO-03 ROLE API ROUTES
+    app
+        .route("/roles")
+        .get(roleController.GetAllRole)
+        .post(roleController.CreateRole);
+
+    app
+        .route("/roles/:id")
+        .get(roleController.GetRoleByID)
+        .put(roleController.UpdateRole)
+        .delete(roleController.DeleteRole);
 };

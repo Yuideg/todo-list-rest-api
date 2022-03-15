@@ -1,5 +1,22 @@
-p, alice, data1, read
-p, bob, data2, write
-p, data2_admin, data2, read
-p, data2_admin, data2, write
-g, alice, data2_admin
+p,anonymous,/api/v1/auth/login,POST
+p,SUPER-ADMIN,/api/v1/roles,GET
+p,SUPER-ADMIN,/api/v1/roles,POST
+p,SUPER-ADMIN,/api/v1/roles/:name,GET
+p,SUPER-ADMIN,/api/v1/roles/:name,PUT
+p,SUPER-ADMIN,/api/v1/roles/:name,DELETE
+
+p,ADMIN,/api/v1/users,GET
+p,USER,/api/v1/users,POST
+
+p,SUPER-ADMIN,/api/v1/users/:username,GET
+p,SUPER-ADMIN,/api/v1/users/:username,PUT
+p,SUPER-ADMIN,/api/v1/users/:username,DELETE
+
+p,ADMIN,/api/v1/tasks,GET
+p,USER,/api/v1/me/tasks,GET
+p,ADMIN,/api/v1/tasks/:user_id,GET
+
+p,USER,/api/v1/tasks,POST
+p,USER,/api/v1/tasks/:task_id,GET
+p,USER,/api/v1/users/:task_id,PUT
+p,USER,/api/v1/tasks/:task_id,DELETE

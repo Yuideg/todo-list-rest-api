@@ -11,9 +11,22 @@ require('dotenv').config();
 var port = process.env.PORT || 9090;
 
 // Connect to MongoDB
-mongoose.connect(
-    'mongodb://mongo:27017/docker-node-mongo',
-    { useNewUrlParser: true }
+const connectionString = "mongodb://root:password123@localhost:27017/streamhatchet?authSource=admin&replicaSet=replicaset&retryWrites=true"
+
+        const options = {
+          useNewUrlParser: true,
+          useUnifiedTopology: true,
+          autoIndex: true,
+          serverSelectionTimeoutMS: 30000,
+          socketTimeoutMS: 75000,
+          family: 4,
+          keepAlive: true, 
+          keepAliveInitialDelay: 300000,
+        };
+  mongoose.connect(
+    'mongodb://mongo:27017/test',
+    // mongo,
+    options
   )
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.log(err));
