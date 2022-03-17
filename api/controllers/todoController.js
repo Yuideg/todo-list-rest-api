@@ -4,15 +4,13 @@ const { GetClaims } = require("../util/util");
 
 
 exports.GetAllTaskPerUSer = (req, res) => {
-    Task.find({
-            user: req.params.user_id
-        }, (err, todo) => {
+    const filter = { user: req.params.user_id };
+    Task.find(filter, (err, todo) => {
             if (err) {
                 return res.send(err);
             }
             return res.json(todo);
         })
-        // .populate("user", "-_id -__v -created_at -updated_at")
         .select("-__v -created_at -updated_at");
 };
 exports.GetAllTask = (req, res) => {
@@ -26,11 +24,17 @@ exports.GetAllTask = (req, res) => {
         .select("-__v -created_at -updated_at");
 };
 
-
-
-
 exports.CreateTask = (req, res) => {
+    var claims = GetClaims(req, res);
+    // console.log("user_id from claims ", claims);
+    if (claims === null) {
+        return res.status(400).json({
+            "message": "User has no valid token credentials!"
+        });
+    }
+
     var newTodo = new Task(req.body);
+    newTodo.user = claims.user_id;
     newTodo.save((err, todo) => {
         if (err) {
             return res.send(err);
@@ -40,8 +44,10 @@ exports.CreateTask = (req, res) => {
 };
 
 
+
 exports.GetTaskByID = (req, res) => {
-    Task.findById(req.params.id, (err, todo) => {
+    const filter = { _id: req.params.id, };
+    Task.findById(filter, (err, todo) => {
             if (err) {
                 return res.send(err);
             }
@@ -54,24 +60,20 @@ exports.GetTaskByID = (req, res) => {
 
 exports.UpdateTask = (req, res) => {
     var claims = GetClaims(req, res);
-
-    Task.findOneAndUpdate({
-        _id: req.params.id,
-        user: claims.user_id
-    }, req.body, { new: true }, (err, todo) => {
-        if (err) {
-            return res.send(err);
-        }
-        return res.json(todo);
-    });
+    const filter = { _id: req.params.id, user: claims.user_id };
+    Task.findOneAndUpdate(
+        filter, req.body, { new: true }, (err, todo) => {
+            if (err) {
+                return res.send(err);
+            }
+            return res.json(todo);
+        });
 };
 
 exports.DeleteTask = (req, res) => {
     var claims = GetClaims(req, res);
-    Task.remove({
-        _id: req.params.id,
-        user: claims.user_id
-    }, (err, todo) => {
+    const filter = { _id: req.params.id, user: claims.user_id };
+    Task.remove(filter, (err, todo) => {
         if (err) {
             return res.send(err);
         }
@@ -79,10 +81,12 @@ exports.DeleteTask = (req, res) => {
     });
 };
 
-// get All tasks for a specific user
+// GetAllUserTasks for a specific user
 exports.GetAllUserTasks = (req, res) => {
     var claims = GetClaims(req, res);
-    Task.find({ user: claims.user_id }, (err, todo) => {
+    const filter = { user: claims.user_id };
+
+    Task.find(filter, (err, todo) => {
             if (err) {
                 return res.send(err);
             }

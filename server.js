@@ -9,10 +9,8 @@ require("./api/models/roleModel");
 require('dotenv').config();
 //Environmental Variables
 var port = process.env.PORT || 9090;
-
 // Connect to MongoDB
-const connectionString = "mongodb://localhost:27017/test?authSource=admin&replicaSet=replicaset&retryWrites=true"
-
+const connectionString = "mongodb://127.0.0.1:27017/todo?directConnection=true&serverSelectionTimeoutMS=2000";
 const options = {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -23,23 +21,16 @@ const options = {
     keepAlive: true,
     keepAliveInitialDelay: 300000,
 };
-mongoose.connect(
-        'mongodb://mongo:27017/test',
-        // mongo,
-        options
-    )
+mongoose.connect(connectionString, options)
     .then(() => console.log('MongoDB Connected'))
     .catch(err => console.log(err));
-
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(auth.Authoriser);
-
 var routes = require("./api/routes/Routes");
 routes(app);
-
 app.listen(port, () => {
     console.log(`localhost is running in http://localhost:${port}`);
 });

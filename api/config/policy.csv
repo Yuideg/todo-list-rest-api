@@ -5,18 +5,20 @@ p,SUPER-ADMIN,/api/v1/roles/:name,GET
 p,SUPER-ADMIN,/api/v1/roles/:name,PUT
 p,SUPER-ADMIN,/api/v1/roles/:name,DELETE
 
-p,ADMIN,/api/v1/users,GET
-p,USER,/api/v1/users,POST
+p,SUPER-ADMIN|SYSTEM-ADMIN,/api/v1/users,GET
+p,SUPER-ADMIN|USER,/api/v1/users,POST
 
 p,SUPER-ADMIN,/api/v1/users/:username,GET
 p,SUPER-ADMIN,/api/v1/users/:username,PUT
 p,SUPER-ADMIN,/api/v1/users/:username,DELETE
 
-p,ADMIN,/api/v1/tasks,GET
-p,USER,/api/v1/me/tasks,GET
-p,ADMIN,/api/v1/tasks/:user_id,GET
+p,SUPER-ADMIN,/api/v1/tasks,GET
+p,SUPER-ADMIN|SYSTEM-ADMIN,/api/v1/tasks:user_id,GET
 
-p,USER,/api/v1/tasks,POST
-p,USER,/api/v1/tasks/:task_id,GET
-p,USER,/api/v1/users/:task_id,PUT
-p,USER,/api/v1/tasks/:task_id,DELETE
+p,SUPER-ADMI|USER,/api/v1/me/tasks,GET
+p,SUPER-ADMIN|SYSTEM-ADMIN,/api/v1/tasks/:user_id,GET
+
+p,SUPER-ADMIN|USER,/api/v1/tasks,POST
+p,SUPER-ADMIN|USER,/api/v1/tasks/:task_id,GET
+p,SUPER-ADMIN|USER,/api/v1/users/:task_id,PUT
+p,SUPER-ADMIN|USER,/api/v1/tasks/:task_id,DELETE
