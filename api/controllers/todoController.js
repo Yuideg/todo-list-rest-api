@@ -26,13 +26,11 @@ exports.GetAllTask = (req, res) => {
 
 exports.CreateTask = (req, res) => {
     var claims = GetClaims(req, res);
-    // console.log("user_id from claims ", claims);
     if (claims === null) {
         return res.status(400).json({
             "message": "User has no valid token credentials!"
         });
     }
-
     var newTodo = new Task(req.body);
     newTodo.user = claims.user_id;
     newTodo.save((err, todo) => {

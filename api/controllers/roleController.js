@@ -48,14 +48,3 @@ exports.DeleteRole = (req, res) => {
         return res.json({ Error: "Role is deleted successfully" });
     });
 };
-
-
-// exports.GetRole = (id) => {
-//     Role.findById(id, (err, role) => {
-//         if (err) {
-//             return null;
-//         }
-//         return res.json(role);
-//     }).select("-__v -created_at -updated_at");
-
-// };

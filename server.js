@@ -21,7 +21,9 @@ const options = {
     keepAlive: true,
     keepAliveInitialDelay: 300000,
 };
-mongoose.connect(connectionString, options)
+mongoose.connect(
+        // 'mongodb://mongo:27017/mydb',
+        connectionString, options)
     .then(() => console.log('MongoDB Connected'))
     .catch(err => console.log(err));
 

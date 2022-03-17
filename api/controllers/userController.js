@@ -3,17 +3,6 @@ var Users = mongoose.model("Users");
 const bcrypt = require("bcrypt");
 
 exports.GetAllUser = (req, res) => {
-    // const users=Users.find()
-    //   .populate("role", "-_id -__v -created_at -updated_at")
-    //   .select("-__v")
-    //   .exec();
-
-
-    //   console.log("users ==>",(users));
-    //   return res.json(users);
-
-
-
     Users.find({}, (err, users) => {
             if (err) {
                 return res.send(err);
@@ -38,7 +27,6 @@ exports.CreateUser = (req, res) => {
         if (user) {
             return res.status(409).send("User Already Exist!");
         }
-
         //Encrypt user password
         var pass = newUser.password.toString();
         var numOfRounds = 10;
