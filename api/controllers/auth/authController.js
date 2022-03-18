@@ -11,7 +11,9 @@ exports.Login = async(req, res) => {
 
     if (!(username && password)) {
 
-        return res.status(400).send("Username or Password Required!");
+        return res.status(400).json({
+            "result": " Username or Password Required!"
+        });
     }
     const user = await Users.findOne({ username }).exec();
     if (!user) {
