@@ -8,7 +8,7 @@ module.exports = (app) => {
         .route('/api/v1/auth/login')
         .post(authController.Login);
     app
-        .route('/api/v1/tasks:user_id')
+        .route('/api/v1/tasks/:user_id')
         .get(todoController.GetAllTaskPerUSer);
     // TODO-01 TASK API ROUTES
     app
