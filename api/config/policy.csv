@@ -12,8 +12,8 @@ p,SUPER-ADMIN,/api/v1/users/:username,GET
 p,SUPER-ADMIN,/api/v1/users/:username,PUT
 p,SUPER-ADMIN,/api/v1/users/:username,DELETE
 
-p,SUPER-ADMIN,/api/v1/tasks,GET
-p,SUPER-ADMIN|SYSTEM-ADMIN,/api/v1/tasks:user_id,GET
+p,SUPER-ADMIN|SYSTEM-ADMIN,/api/v1/tasks,GET
+p,SUPER-ADMIN|SYSTEM-ADMIN,/api/v1/tasks/:user_id,GET
 
 p,SUPER-ADMI|USER,/api/v1/me/tasks,GET
 p,SUPER-ADMIN|SYSTEM-ADMIN,/api/v1/tasks/:user_id,GET

@@ -14,7 +14,6 @@ module.exports = (app) => {
     app
         .route("/api/v1/tasks")
         .get(todoController.GetAllTask)
-        .get(todoController.GetAllUserTasks)
         .post(todoController.CreateTask);
 
     app
