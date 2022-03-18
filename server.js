@@ -10,27 +10,23 @@ require('dotenv').config();
 //Environmental Variables
 var port = process.env.PORT || 9090;
 // Connect to MongoDB
-const connectionString = "mongodb://127.0.0.1:27017/todo?directConnection=true&serverSelectionTimeoutMS=2000";
+// const connectionString = "mongodb://127.0.0.1:27017/todo?directConnection=true&serverSelectionTimeoutMS=2000";
+const connectionString = 'mongodb+srv://endeg:endeg2378@cluster0.nza7l.mongodb.net/todo?retryWrites=true&w=majority';
 const options = {
     useNewUrlParser: true,
-    useUnifiedTopology: true,
-    autoIndex: true,
-    serverSelectionTimeoutMS: 30000,
-    socketTimeoutMS: 75000,
-    family: 4,
-    keepAlive: true,
-    keepAliveInitialDelay: 300000,
 };
-mongoose.connect(
-        // 'mongodb://mongo:27017/mydb',
-        connectionString, options)
+// 'mongodb://mongo:27017/mydb',
+
+mongoose
+    .connect(connectionString, options)
     .then(() => console.log('MongoDB Connected'))
     .catch(err => console.log(err));
+
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.json());
-app.use(auth.Authoriser);
+// app.use(auth.Authoriser);
 var routes = require("./api/routes/Routes");
 routes(app);
 app.listen(port, () => {
