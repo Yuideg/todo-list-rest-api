@@ -26,7 +26,7 @@ mongoose
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.json());
-// app.use(auth.Authoriser);
+app.use(auth.Authoriser);
 var routes = require("./api/routes/Routes");
 routes(app);
 app.listen(port, () => {
